@@ -1,0 +1,7 @@
+.buttonBoxContainer{
+    display: flex;
+    border: 2px solid hotpink;
+    padding: 1rem;
+    width: 50%;
+    justify-content: space-around;
+}

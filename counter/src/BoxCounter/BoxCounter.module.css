@@ -1,0 +1,10 @@
+.boxCounterContainer{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid hotpink;
+    height: 20rem;
+    width: 30%;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+}

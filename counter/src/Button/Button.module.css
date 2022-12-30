@@ -1,0 +1,24 @@
+.button{
+    width: 5rem;
+    height: 2rem;
+    background-color: hotpink;
+    color: white;
+    font-size: 18px;
+    border: 2px solid hotpink;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.button:hover{
+    color: #a96b8a;
+}
+
+.disabled{
+    width: 5rem;
+    height: 2rem;
+    background-color: #ded0d3;
+    color: black;
+    font-size: 18px;
+    border: 2px solid #ded0d3;
+    border-radius: 10px;
+}

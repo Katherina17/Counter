@@ -1,0 +1,6 @@
+.counter-container{
+  background-color: white;
+  height: 940px;
+  display: flex;
+  justify-content: center;
+}
