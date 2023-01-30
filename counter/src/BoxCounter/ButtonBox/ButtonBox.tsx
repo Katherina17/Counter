@@ -7,6 +7,7 @@ type ButtonBoxPropsType = {
     counter: number;
     maxValue: number;
     minValue: number;
+    invalidValue: boolean
 }
 
 export const ButtonBox = (props: ButtonBoxPropsType) => {
@@ -15,8 +16,8 @@ export const ButtonBox = (props: ButtonBoxPropsType) => {
 
     return(
         <div className={s.buttonBoxContainer}>
-            <Button name={'add'} callback={addOnClickHandler} disabled={props.counter === props.maxValue }/>
-            <Button name = {'reset'} callback={resetOnClickHandler} disabled={props.counter === props.minValue }/>
+            <Button name={'add'} callback={addOnClickHandler} disabled={props.counter === props.maxValue || props.invalidValue }/>
+            <Button name = {'reset'} callback={resetOnClickHandler} disabled={props.counter === props.minValue || props.invalidValue}/>
         </div>
     )
 }

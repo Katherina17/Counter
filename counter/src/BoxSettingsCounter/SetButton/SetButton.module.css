@@ -1,0 +1,8 @@
+.setButtonContainer{
+    border: 2px solid hotpink;
+    padding: 1rem;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    border-radius: 1rem;
+}

@@ -1,0 +1,12 @@
+.settingsCounterContainer{
+    border: 2px solid hotpink;
+    width: 80%;
+    height: 8rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
