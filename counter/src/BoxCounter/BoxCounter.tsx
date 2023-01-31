@@ -9,20 +9,16 @@ type boxCounterPropsType = {
     resetCount: () => void;
     maxValue: number;
     minValue: number;
-    validateStartAndEndValues: () => boolean
     focusInput: boolean
     error: boolean
 }
 
 export const BoxCounter = (props: boxCounterPropsType) => {
-    const[invalidValue, setInvalid] = useState(false);
     return (
         <div className={s.boxCounterContainer}>
             <Counter counter={props.counter}
                      minValue={props.minValue}
                      maxValue={props.maxValue}
-                     validateStartAndEndValues = {props.validateStartAndEndValues}
-                     setInvalid = {setInvalid}
                      focusInput={props.focusInput}
                      error={props.error}
             />
@@ -31,7 +27,8 @@ export const BoxCounter = (props: boxCounterPropsType) => {
                        counter={props.counter}
                        maxValue={props.maxValue}
                        minValue={props.minValue}
-                       invalidValue={invalidValue}
+                       focusInput={props.focusInput}
+                       error={props.error}
                       />
         </div>
     )

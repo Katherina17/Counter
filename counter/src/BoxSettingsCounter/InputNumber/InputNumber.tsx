@@ -5,22 +5,15 @@ type InputNumberPropsType = {
     name: 'Max Value' | 'Start Value';
     callBack: (num: number) => void;
     value?: number;
-    setFocusInput: (focus: boolean) => void
-    validateStartAndEndValues: () => boolean
-    error: boolean
+    valueValidator: (num: number | undefined) => boolean;
 }
 
 export const InputNumber = (props: InputNumberPropsType) => {
     let[inputValue, setInputValue] = useState(props.value);
+
     const inputOnChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setInputValue(Number(e.currentTarget.value));
         props.callBack(Number(e.currentTarget.value));
-        if(e.currentTarget.value[0] && e.currentTarget.value[1] !== undefined){
-            props.setFocusInput(false);
-            props.validateStartAndEndValues();
-        } else {
-            props.setFocusInput(true)
-        }
     }
 
     return(
@@ -28,7 +21,10 @@ export const InputNumber = (props: InputNumberPropsType) => {
             <span className={s.span}>
                 {props.name}:
             </span>
-            <input type='number' onChange={inputOnChangeHandler} className={props.error ?  s.inputError : s.input} value={inputValue}/>
+            <input type='number'
+                   onChange={inputOnChangeHandler}
+                   className={!props.valueValidator(inputValue) ?  s.inputError : s.input}
+                   value={inputValue}/>
         </div>
     )
 }

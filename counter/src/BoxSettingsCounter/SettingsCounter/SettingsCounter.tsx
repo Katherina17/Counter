@@ -7,29 +7,33 @@ type SettingsCounterPropsType = {
     setCurrentMinValue: (num: number) => void
     setCurrentMaxValue: (num: number) => void
     setFocusInput: (focus: boolean) => void
-    validateStartAndEndValues: () => boolean
-    error: boolean
 }
 
 
 export const SettingsCounter = (props: SettingsCounterPropsType) => {
-    return(
+    return (
         <div className={s.settingsCounterContainer}>
             <InputNumber
                 value={props.maxValue}
                 name={'Max Value'}
-                callBack={(num) => {props.setCurrentMaxValue(num)}}
-                setFocusInput={props.setFocusInput}
-                validateStartAndEndValues={props.validateStartAndEndValues}
-                error={props.error}
+                callBack={(num) => {
+                    props.setCurrentMaxValue(num);
+                    props.setFocusInput(true);
+                }}
+                valueValidator={(num) => {
+                    return num !== undefined && num > props.minValue && num >= 0;
+                }}
             />
             <InputNumber
                 value={props.minValue}
                 name={'Start Value'}
-                callBack={ (num) =>  {props.setCurrentMinValue(num)}}
-                setFocusInput={props.setFocusInput}
-                validateStartAndEndValues = {props.validateStartAndEndValues}
-                error={props.error}
+                callBack={(num) => {
+                    props.setCurrentMinValue(num);
+                    props.setFocusInput(true);
+                }}
+                valueValidator={(num) => {
+                    return num !== undefined && num < props.maxValue && num >= 0;
+                }}
             />
 
         </div>
