@@ -2,7 +2,6 @@ import s from '../BoxCounter/BoxCounter.module.css';
 import {SettingsCounter} from "./SettingsCounter/SettingsCounter";
 import {SetButton} from "./SetButton/SetButton";
 import {useEffect, useState} from "react";
-import {validateHeaderValue} from "http";
 
 type BoxSettingsCounterPropsType = {
     setMinValue: (num: number) => void;
@@ -13,6 +12,7 @@ type BoxSettingsCounterPropsType = {
     focusInput: boolean
     error: boolean
     setFocusInput: (focus: boolean) => void
+    setSettingCounter: (val: boolean) => void;
     setError: (val: boolean) => void
 }
 
@@ -32,11 +32,12 @@ export const BoxSettingsCounter = (props: BoxSettingsCounterPropsType) => {
         props.setMinValue(currentMinValue);
         props.setMaxValue(currentMaxValue);
         props.setCounter(currentMinValue);
+        props.setSettingCounter(false)
         props.setFocusInput(false);
     }
 
     return(
-        <div className={s.boxCounterContainer} style={{marginRight: '5rem'}}>
+        <div className={s.boxCounterContainer}>
             <SettingsCounter
                 maxValue={currentMaxValue}
                 minValue={currentMinValue}

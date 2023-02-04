@@ -10,7 +10,9 @@ type boxCounterPropsType = {
     maxValue: number;
     minValue: number;
     focusInput: boolean
-    error: boolean
+    error: boolean;
+    isSettingCounter: boolean
+    setSettingCounter: (val: boolean) => void
 }
 
 export const BoxCounter = (props: boxCounterPropsType) => {
@@ -28,6 +30,7 @@ export const BoxCounter = (props: boxCounterPropsType) => {
                        maxValue={props.maxValue}
                        minValue={props.minValue}
                        focusInput={props.focusInput}
+                       setSettingCounter={props.setSettingCounter}
                        error={props.error}
                       />
         </div>

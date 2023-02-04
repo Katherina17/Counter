@@ -9,6 +9,7 @@ function App() {
     const [counter, setCounter] = useState<number>(minValue);
     const [focusInput, setFocusInput] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
+    const [isSettingCounter, setSettingCounter] = useState<boolean>(false);
 
     const resetCount = () => setCounter(minValue);
     const addCount = () => setCounter(counter + 1);
@@ -20,7 +21,7 @@ function App() {
 
     return (
         <div className="counter-container">
-            <BoxSettingsCounter
+            {isSettingCounter && <BoxSettingsCounter
                 minValue={minValue}
                 maxValue={maxValue}
                 setMinValue={setMinValue}
@@ -29,14 +30,17 @@ function App() {
                 setFocusInput={setFocusInput}
                 setCounter={setCounter}
                 error={error}
-                setError={setError}/>
-            <BoxCounter counter={counter}
-                        addCount={addCount}
-                        resetCount={resetCount}
-                        maxValue={maxValue}
-                        minValue={minValue}
-                        focusInput={focusInput}
-                        error={error}/>
+                setSettingCounter={setSettingCounter}
+                setError={setError}/>}
+            {!isSettingCounter && <BoxCounter counter={counter}
+                                              addCount={addCount}
+                                              resetCount={resetCount}
+                                              maxValue={maxValue}
+                                              minValue={minValue}
+                                              focusInput={focusInput}
+                                              setSettingCounter={setSettingCounter}
+                                              isSettingCounter={isSettingCounter}
+                                              error={error}/>}
         </div>
     );
 }
