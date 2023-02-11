@@ -5,4 +5,5 @@
     width: 75%;
     justify-content: space-evenly;
     border-radius: 1rem;
+    gap: 0.5rem;
 }
