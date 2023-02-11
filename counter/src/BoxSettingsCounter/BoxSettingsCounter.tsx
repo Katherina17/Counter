@@ -1,14 +1,11 @@
 import s from '../BoxCounter/BoxCounter.module.css';
 import {SettingsCounter} from "./SettingsCounter/SettingsCounter";
 import {SetButton} from "./SetButton/SetButton";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
+import {useSelector} from "react-redux";
+import {AppRootStateType} from "../store/store";
 
 type BoxSettingsCounterPropsType = {
-    setMinValue: (num: number) => void;
-    setMaxValue: (num: number) => void;
-    setCounter: (num: number) => void;
-    maxValue: number;
-    minValue: number;
     focusInput: boolean
     error: boolean
     setFocusInput: (focus: boolean) => void
@@ -17,38 +14,29 @@ type BoxSettingsCounterPropsType = {
 }
 
 export const BoxSettingsCounter = (props: BoxSettingsCounterPropsType) => {
-    const [currentMinValue, setCurrentMinValue] = useState(props.minValue);
-    const [currentMaxValue, setCurrentMaxValue] = useState(props.maxValue);
-
+    const maxValue = useSelector<AppRootStateType, number>(state => state.maxValue.maxValue)
+    const minValue = useSelector<AppRootStateType, number>(state => state.counter.minValue)
     const isValidValues = () => {
-        return !(currentMinValue < 0 || currentMinValue === currentMaxValue || currentMaxValue < currentMinValue || currentMaxValue < 0);
+        return !(minValue < 0 || minValue === maxValue || maxValue < minValue || maxValue < 0);
     }
+
+        useEffect(() => {
+        localStorage.setItem('setMinVal', JSON.stringify(minValue));
+        localStorage.setItem('setMaxVal', JSON.stringify(maxValue));
+    }, [minValue, maxValue]);
 
     useEffect(() => {
         props.setError(!isValidValues());
-    }, [currentMinValue, currentMaxValue]);
+    }, [minValue, maxValue]);
 
     const addValuesForCounter = () => {
-        props.setMinValue(currentMinValue);
-        props.setMaxValue(currentMaxValue);
-        props.setCounter(currentMinValue);
         props.setSettingCounter(false)
         props.setFocusInput(false);
     }
 
     return(
         <div className={s.boxCounterContainer}>
-            <SettingsCounter
-                maxValue={currentMaxValue}
-                minValue={currentMinValue}
-                setCurrentMinValue = {(num) => {
-                    setCurrentMinValue(num);
-                }}
-                setCurrentMaxValue = {(num) => {
-                    setCurrentMaxValue(num);
-                }}
-                setFocusInput = {props.setFocusInput}
-               />
+            <SettingsCounter setFocusInput = {props.setFocusInput}/>
             <SetButton callback={addValuesForCounter} focusInput={props.focusInput} error={props.error}/>
         </div>
     )
